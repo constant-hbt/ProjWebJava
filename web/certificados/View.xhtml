@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CertificadosViewDlg" widgetVar="CertificadosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCertificadosTitle}">
+            <h:form id="CertificadosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{certificadosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_idcertificado}"/>
+                        <h:outputText value="#{certificadosController.selected.idcertificado}" title="#{bundle.ViewCertificadosTitle_idcertificado}"/>
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_url}"/>
+                        <h:outputText value="#{certificadosController.selected.url}" title="#{bundle.ViewCertificadosTitle_url}"/>
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_datahora}"/>
+                        <h:outputText value="#{certificadosController.selected.datahora}" title="#{bundle.ViewCertificadosTitle_datahora}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_eventos}"/>
+                        <h:outputText value="#{certificadosController.selected.eventos}" title="#{bundle.ViewCertificadosTitle_eventos}"/>
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_participantes}"/>
+                        <h:outputText value="#{certificadosController.selected.participantes}" title="#{bundle.ViewCertificadosTitle_participantes}"/>
+                        <h:outputText value="#{bundle.ViewCertificadosLabel_status}"/>
+                        <h:outputText value="#{certificadosController.selected.status}" title="#{bundle.ViewCertificadosTitle_status}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CertificadosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

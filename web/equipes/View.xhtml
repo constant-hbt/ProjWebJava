@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipesViewDlg" widgetVar="EquipesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEquipesTitle}">
+            <h:form id="EquipesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEquipesLabel_idequipe}"/>
+                        <h:outputText value="#{equipesController.selected.idequipe}" title="#{bundle.ViewEquipesTitle_idequipe}"/>
+                        <h:outputText value="#{bundle.ViewEquipesLabel_nome}"/>
+                        <h:outputText value="#{equipesController.selected.nome}" title="#{bundle.ViewEquipesTitle_nome}"/>
+                        <h:outputText value="#{bundle.ViewEquipesLabel_descricao}"/>
+                        <h:outputText value="#{equipesController.selected.descricao}" title="#{bundle.ViewEquipesTitle_descricao}"/>
+                        <h:outputText value="#{bundle.ViewEquipesLabel_idlider}"/>
+                        <h:outputText value="#{equipesController.selected.idlider}" title="#{bundle.ViewEquipesTitle_idlider}"/>
+                        <h:outputText value="#{bundle.ViewEquipesLabel_status}"/>
+                        <h:outputText value="#{equipesController.selected.status}" title="#{bundle.ViewEquipesTitle_status}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EquipesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

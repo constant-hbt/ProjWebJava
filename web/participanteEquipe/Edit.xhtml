@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParticipanteEquipeEditDlg" widgetVar="ParticipanteEquipeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditParticipanteEquipeTitle}">
+            <h:form id="ParticipanteEquipeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{participanteEquipeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditParticipanteEquipeLabel_idpartequipe}" for="idpartequipe" />
+                        <p:inputText id="idpartequipe" value="#{participanteEquipeController.selected.idpartequipe}" title="#{bundle.EditParticipanteEquipeTitle_idpartequipe}" required="true" requiredMessage="#{bundle.EditParticipanteEquipeRequiredMessage_idpartequipe}"/>
+                        <p:outputLabel value="#{bundle.EditParticipanteEquipeLabel_equipes}" for="equipes" />
+                        <p:selectOneMenu id="equipes" value="#{participanteEquipeController.selected.equipes}" required="true" requiredMessage="#{bundle.EditParticipanteEquipeRequiredMessage_equipes}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equipesController.itemsAvailableSelectOne}"
+                                           var="equipesItem"
+                                           itemValue="#{equipesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipanteEquipeLabel_participantes}" for="participantes" />
+                        <p:selectOneMenu id="participantes" value="#{participanteEquipeController.selected.participantes}" required="true" requiredMessage="#{bundle.EditParticipanteEquipeRequiredMessage_participantes}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{participantesController.itemsAvailableSelectOne}"
+                                           var="participantesItem"
+                                           itemValue="#{participantesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditParticipanteEquipeLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{participanteEquipeController.selected.status}" required="true" requiredMessage="#{bundle.EditParticipanteEquipeRequiredMessage_status}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{participanteEquipeController.update}" value="#{bundle.Save}" update="display,:ParticipanteEquipeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParticipanteEquipeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ParticipanteEquipeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

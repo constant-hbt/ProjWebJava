@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PresencasEquipeSubViewDlg" widgetVar="PresencasEquipeSubViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPresencasEquipeSubTitle}">
+            <h:form id="PresencasEquipeSubViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{presencasEquipeSubController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPresencasEquipeSubLabel_datahora}"/>
+                        <h:outputText value="#{presencasEquipeSubController.selected.datahora}" title="#{bundle.ViewPresencasEquipeSubTitle_datahora}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPresencasEquipeSubLabel_equipes}"/>
+                        <h:outputText value="#{presencasEquipeSubController.selected.equipes}" title="#{bundle.ViewPresencasEquipeSubTitle_equipes}"/>
+                        <h:outputText value="#{bundle.ViewPresencasEquipeSubLabel_subeventos}"/>
+                        <h:outputText value="#{presencasEquipeSubController.selected.subeventos}" title="#{bundle.ViewPresencasEquipeSubTitle_subeventos}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PresencasEquipeSubViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

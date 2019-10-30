@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SubeventosEditDlg" widgetVar="SubeventosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSubeventosTitle}">
+            <h:form id="SubeventosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{subeventosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_idsubevento}" for="idsubevento" />
+                        <p:inputText id="idsubevento" value="#{subeventosController.selected.idsubevento}" title="#{bundle.EditSubeventosTitle_idsubevento}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_idsubevento}"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{subeventosController.selected.nome}" title="#{bundle.EditSubeventosTitle_nome}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_nome}"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_descricao}" for="descricao" />
+                        <p:inputText id="descricao" value="#{subeventosController.selected.descricao}" title="#{bundle.EditSubeventosTitle_descricao}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_descricao}"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_datainicio}" for="datainicio" />
+                        <p:calendar id="datainicio" pattern="MM/dd/yyyy" value="#{subeventosController.selected.datainicio}" title="#{bundle.EditSubeventosTitle_datainicio}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_datainicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_datafim}" for="datafim" />
+                        <p:calendar id="datafim" pattern="MM/dd/yyyy" value="#{subeventosController.selected.datafim}" title="#{bundle.EditSubeventosTitle_datafim}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_datafim}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_datafiminsc}" for="datafiminsc" />
+                        <p:calendar id="datafiminsc" pattern="MM/dd/yyyy" value="#{subeventosController.selected.datafiminsc}" title="#{bundle.EditSubeventosTitle_datafiminsc}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_datafiminsc}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_datainicioinsc}" for="datainicioinsc" />
+                        <p:calendar id="datainicioinsc" pattern="MM/dd/yyyy" value="#{subeventosController.selected.datainicioinsc}" title="#{bundle.EditSubeventosTitle_datainicioinsc}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_datainicioinsc}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_eventos}" for="eventos" />
+                        <p:selectOneMenu id="eventos" value="#{subeventosController.selected.eventos}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_eventos}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{eventosController.itemsAvailableSelectOne}"
+                                           var="eventosItem"
+                                           itemValue="#{eventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_salas}" for="salas" />
+                        <p:selectOneMenu id="salas" value="#{subeventosController.selected.salas}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_salas}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{salasController.itemsAvailableSelectOne}"
+                                           var="salasItem"
+                                           itemValue="#{salasItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSubeventosLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{subeventosController.selected.status}" required="true" requiredMessage="#{bundle.EditSubeventosRequiredMessage_status}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{subeventosController.update}" value="#{bundle.Save}" update="display,:SubeventosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubeventosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SubeventosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

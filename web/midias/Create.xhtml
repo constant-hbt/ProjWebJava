@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MidiasCreateDlg" widgetVar="MidiasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMidiasTitle}">
+            <h:form id="MidiasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{midiasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_idmidia}" for="idmidia" />
+                        <p:inputText id="idmidia" value="#{midiasController.selected.idmidia}" title="#{bundle.CreateMidiasTitle_idmidia}" required="true" requiredMessage="#{bundle.CreateMidiasRequiredMessage_idmidia}"/>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_legenda}" for="legenda" />
+                        <p:inputText id="legenda" value="#{midiasController.selected.legenda}" title="#{bundle.CreateMidiasTitle_legenda}" required="true" requiredMessage="#{bundle.CreateMidiasRequiredMessage_legenda}"/>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_pathmidia}" for="pathmidia" />
+                        <p:inputText id="pathmidia" value="#{midiasController.selected.pathmidia}" title="#{bundle.CreateMidiasTitle_pathmidia}" required="true" requiredMessage="#{bundle.CreateMidiasRequiredMessage_pathmidia}"/>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_categoriamidia}" for="categoriamidia" />
+                        <p:selectOneMenu id="categoriamidia" value="#{midiasController.selected.categoriamidia}" required="true" requiredMessage="#{bundle.EditMidiasRequiredMessage_categoriamidia}">
+                            <f:selectItems value="#{categoriamidiaController.itemsAvailableSelectOne}"
+                                           var="categoriamidiaItem"
+                                           itemValue="#{categoriamidiaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_eventos}" for="eventos" />
+                        <p:selectOneMenu id="eventos" value="#{midiasController.selected.eventos}" >
+                            <f:selectItems value="#{eventosController.itemsAvailableSelectOne}"
+                                           var="eventosItem"
+                                           itemValue="#{eventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{midiasController.selected.status}" required="true" requiredMessage="#{bundle.EditMidiasRequiredMessage_status}">
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMidiasLabel_subeventos}" for="subeventos" />
+                        <p:selectOneMenu id="subeventos" value="#{midiasController.selected.subeventos}" >
+                            <f:selectItems value="#{subeventosController.itemsAvailableSelectOne}"
+                                           var="subeventosItem"
+                                           itemValue="#{subeventosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{midiasController.create}" value="#{bundle.Save}" update="display,:MidiasListForm:datalist,:growl" oncomplete="handleSubmit(args,'MidiasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MidiasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

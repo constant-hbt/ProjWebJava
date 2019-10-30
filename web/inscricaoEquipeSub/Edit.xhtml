@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InscricaoEquipeSubEditDlg" widgetVar="InscricaoEquipeSubEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInscricaoEquipeSubTitle}">
+            <h:form id="InscricaoEquipeSubEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscricaoEquipeSubController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInscricaoEquipeSubLabel_idequipesub}" for="idequipesub" />
+                        <p:inputText id="idequipesub" value="#{inscricaoEquipeSubController.selected.idequipesub}" title="#{bundle.EditInscricaoEquipeSubTitle_idequipesub}" required="true" requiredMessage="#{bundle.EditInscricaoEquipeSubRequiredMessage_idequipesub}"/>
+                        <p:outputLabel value="#{bundle.EditInscricaoEquipeSubLabel_datahora}" for="datahora" />
+                        <p:calendar id="datahora" pattern="MM/dd/yyyy HH:mm:ss" value="#{inscricaoEquipeSubController.selected.datahora}" title="#{bundle.EditInscricaoEquipeSubTitle_datahora}" required="true" requiredMessage="#{bundle.EditInscricaoEquipeSubRequiredMessage_datahora}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInscricaoEquipeSubLabel_equipes}" for="equipes" />
+                        <p:selectOneMenu id="equipes" value="#{inscricaoEquipeSubController.selected.equipes}" required="true" requiredMessage="#{bundle.EditInscricaoEquipeSubRequiredMessage_equipes}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equipesController.itemsAvailableSelectOne}"
+                                           var="equipesItem"
+                                           itemValue="#{equipesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditInscricaoEquipeSubLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{inscricaoEquipeSubController.selected.status}" required="true" requiredMessage="#{bundle.EditInscricaoEquipeSubRequiredMessage_status}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditInscricaoEquipeSubLabel_subeventos}" for="subeventos" />
+                        <p:selectOneMenu id="subeventos" value="#{inscricaoEquipeSubController.selected.subeventos}" required="true" requiredMessage="#{bundle.EditInscricaoEquipeSubRequiredMessage_subeventos}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{subeventosController.itemsAvailableSelectOne}"
+                                           var="subeventosItem"
+                                           itemValue="#{subeventosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inscricaoEquipeSubController.update}" value="#{bundle.Save}" update="display,:InscricaoEquipeSubListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InscricaoEquipeSubEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InscricaoEquipeSubEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

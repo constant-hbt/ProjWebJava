@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+                <h:form id="menuForm">
+                    <p:menubar>
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Apresentacao" outcome="/apresentacao/List.xhtml" />
+                            <p:menuitem value="Categoriamidia" outcome="/categoriamidia/List.xhtml" />
+                            <p:menuitem value="Certificados" outcome="/certificados/List.xhtml" />
+                            <p:menuitem value="Crachas" outcome="/crachas/List.xhtml" />
+                            <p:menuitem value="Editais" outcome="/editais/List.xhtml" />
+                            <p:menuitem value="Equipes" outcome="/equipes/List.xhtml" />
+                            <p:menuitem value="Eventos" outcome="/eventos/List.xhtml" />
+                            <p:menuitem value="InscricaoEquipeSub" outcome="/inscricaoEquipeSub/List.xhtml" />
+                            <p:menuitem value="InscricaoPartEvento" outcome="/inscricaoPartEvento/List.xhtml" />
+                            <p:menuitem value="InscricaoPartSubeve" outcome="/inscricaoPartSubeve/List.xhtml" />
+                            <p:menuitem value="Midias" outcome="/midias/List.xhtml" />
+                            <p:menuitem value="Organizadores" outcome="/organizadores/List.xhtml" />
+                            <p:menuitem value="ParticipanteEquipe" outcome="/participanteEquipe/List.xhtml" />
+                            <p:menuitem value="Participantes" outcome="/participantes/List.xhtml" />
+                            <p:menuitem value="Patrocinioimagens" outcome="/patrocinioimagens/List.xhtml" />
+                            <p:menuitem value="Patrocinios" outcome="/patrocinios/List.xhtml" />
+                            <p:menuitem value="PresencasEquipeSub" outcome="/presencasEquipeSub/List.xhtml" />
+                            <p:menuitem value="PresencasEve" outcome="/presencasEve/List.xhtml" />
+                            <p:menuitem value="PresencasSub" outcome="/presencasSub/List.xhtml" />
+                            <p:menuitem value="Salas" outcome="/salas/List.xhtml" />
+                            <p:menuitem value="Status" outcome="/status/List.xhtml" />
+                            <p:menuitem value="Subeventos" outcome="/subeventos/List.xhtml" />
+                            <p:menuitem value="Submissao" outcome="/submissao/List.xhtml" />
+                            <p:menuitem value="Usuarios" outcome="/usuarios/List.xhtml" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

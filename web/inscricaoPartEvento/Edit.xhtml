@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InscricaoPartEventoEditDlg" widgetVar="InscricaoPartEventoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInscricaoPartEventoTitle}">
+            <h:form id="InscricaoPartEventoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscricaoPartEventoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInscricaoPartEventoLabel_idinscricao}" for="idinscricao" />
+                        <p:inputText id="idinscricao" value="#{inscricaoPartEventoController.selected.idinscricao}" title="#{bundle.EditInscricaoPartEventoTitle_idinscricao}" required="true" requiredMessage="#{bundle.EditInscricaoPartEventoRequiredMessage_idinscricao}"/>
+                        <p:outputLabel value="#{bundle.EditInscricaoPartEventoLabel_datahora}" for="datahora" />
+                        <p:calendar id="datahora" pattern="MM/dd/yyyy HH:mm:ss" value="#{inscricaoPartEventoController.selected.datahora}" title="#{bundle.EditInscricaoPartEventoTitle_datahora}" required="true" requiredMessage="#{bundle.EditInscricaoPartEventoRequiredMessage_datahora}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInscricaoPartEventoLabel_eventos}" for="eventos" />
+                        <p:selectOneMenu id="eventos" value="#{inscricaoPartEventoController.selected.eventos}" required="true" requiredMessage="#{bundle.EditInscricaoPartEventoRequiredMessage_eventos}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{eventosController.itemsAvailableSelectOne}"
+                                           var="eventosItem"
+                                           itemValue="#{eventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditInscricaoPartEventoLabel_participantes}" for="participantes" />
+                        <p:selectOneMenu id="participantes" value="#{inscricaoPartEventoController.selected.participantes}" required="true" requiredMessage="#{bundle.EditInscricaoPartEventoRequiredMessage_participantes}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{participantesController.itemsAvailableSelectOne}"
+                                           var="participantesItem"
+                                           itemValue="#{participantesItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inscricaoPartEventoController.update}" value="#{bundle.Save}" update="display,:InscricaoPartEventoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InscricaoPartEventoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InscricaoPartEventoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

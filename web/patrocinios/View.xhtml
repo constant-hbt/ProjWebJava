@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatrociniosViewDlg" widgetVar="PatrociniosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPatrociniosTitle}">
+            <h:form id="PatrociniosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patrociniosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_idpatrocinio}"/>
+                        <h:outputText value="#{patrociniosController.selected.idpatrocinio}" title="#{bundle.ViewPatrociniosTitle_idpatrocinio}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_nome}"/>
+                        <h:outputText value="#{patrociniosController.selected.nome}" title="#{bundle.ViewPatrociniosTitle_nome}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_documento}"/>
+                        <h:outputText value="#{patrociniosController.selected.documento}" title="#{bundle.ViewPatrociniosTitle_documento}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_descricao}"/>
+                        <h:outputText value="#{patrociniosController.selected.descricao}" title="#{bundle.ViewPatrociniosTitle_descricao}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_segmento}"/>
+                        <h:outputText value="#{patrociniosController.selected.segmento}" title="#{bundle.ViewPatrociniosTitle_segmento}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_endereco}"/>
+                        <h:outputText value="#{patrociniosController.selected.endereco}" title="#{bundle.ViewPatrociniosTitle_endereco}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_site}"/>
+                        <h:outputText value="#{patrociniosController.selected.site}" title="#{bundle.ViewPatrociniosTitle_site}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_valor}"/>
+                        <h:outputText value="#{patrociniosController.selected.valor}" title="#{bundle.ViewPatrociniosTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_eventos}"/>
+                        <h:outputText value="#{patrociniosController.selected.eventos}" title="#{bundle.ViewPatrociniosTitle_eventos}"/>
+                        <h:outputText value="#{bundle.ViewPatrociniosLabel_status}"/>
+                        <h:outputText value="#{patrociniosController.selected.status}" title="#{bundle.ViewPatrociniosTitle_status}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PatrociniosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

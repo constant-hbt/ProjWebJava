@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrganizadoresViewDlg" widgetVar="OrganizadoresViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOrganizadoresTitle}">
+            <h:form id="OrganizadoresViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{organizadoresController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOrganizadoresLabel_idorganizador}"/>
+                        <h:outputText value="#{organizadoresController.selected.idorganizador}" title="#{bundle.ViewOrganizadoresTitle_idorganizador}"/>
+                        <h:outputText value="#{bundle.ViewOrganizadoresLabel_funcao}"/>
+                        <h:outputText value="#{organizadoresController.selected.funcao}" title="#{bundle.ViewOrganizadoresTitle_funcao}"/>
+                        <h:outputText value="#{bundle.ViewOrganizadoresLabel_eventos}"/>
+                        <h:outputText value="#{organizadoresController.selected.eventos}" title="#{bundle.ViewOrganizadoresTitle_eventos}"/>
+                        <h:outputText value="#{bundle.ViewOrganizadoresLabel_usuarios}"/>
+                        <h:outputText value="#{organizadoresController.selected.usuarios}" title="#{bundle.ViewOrganizadoresTitle_usuarios}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OrganizadoresViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

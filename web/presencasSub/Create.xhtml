@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PresencasSubCreateDlg" widgetVar="PresencasSubCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePresencasSubTitle}">
+            <h:form id="PresencasSubCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{presencasSubController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePresencasSubLabel_datahora}" for="datahora" />
+                        <p:calendar id="datahora" pattern="MM/dd/yyyy HH:mm:ss" value="#{presencasSubController.selected.datahora}" title="#{bundle.EditPresencasSubTitle_datahora}" required="true" requiredMessage="#{bundle.EditPresencasSubRequiredMessage_datahora}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePresencasSubLabel_participantes}" for="participantes" />
+                        <p:selectOneMenu id="participantes" value="#{presencasSubController.selected.participantes}" required="true" requiredMessage="#{bundle.EditPresencasSubRequiredMessage_participantes}">
+                            <f:selectItems value="#{participantesController.itemsAvailableSelectOne}"
+                                           var="participantesItem"
+                                           itemValue="#{participantesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePresencasSubLabel_subeventos}" for="subeventos" />
+                        <p:selectOneMenu id="subeventos" value="#{presencasSubController.selected.subeventos}" required="true" requiredMessage="#{bundle.EditPresencasSubRequiredMessage_subeventos}">
+                            <f:selectItems value="#{subeventosController.itemsAvailableSelectOne}"
+                                           var="subeventosItem"
+                                           itemValue="#{subeventosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{presencasSubController.create}" value="#{bundle.Save}" update="display,:PresencasSubListForm:datalist,:growl" oncomplete="handleSubmit(args,'PresencasSubCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PresencasSubCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

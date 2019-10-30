@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InscricaoPartSubeveCreateDlg" widgetVar="InscricaoPartSubeveCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInscricaoPartSubeveTitle}">
+            <h:form id="InscricaoPartSubeveCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscricaoPartSubeveController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInscricaoPartSubeveLabel_idinscricao}" for="idinscricao" />
+                        <p:inputText id="idinscricao" value="#{inscricaoPartSubeveController.selected.idinscricao}" title="#{bundle.CreateInscricaoPartSubeveTitle_idinscricao}" required="true" requiredMessage="#{bundle.CreateInscricaoPartSubeveRequiredMessage_idinscricao}"/>
+                        <p:outputLabel value="#{bundle.CreateInscricaoPartSubeveLabel_datahora}" for="datahora" />
+                        <p:calendar id="datahora" pattern="MM/dd/yyyy HH:mm:ss" value="#{inscricaoPartSubeveController.selected.datahora}" title="#{bundle.EditInscricaoPartSubeveTitle_datahora}" required="true" requiredMessage="#{bundle.EditInscricaoPartSubeveRequiredMessage_datahora}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInscricaoPartSubeveLabel_participantes}" for="participantes" />
+                        <p:selectOneMenu id="participantes" value="#{inscricaoPartSubeveController.selected.participantes}" required="true" requiredMessage="#{bundle.EditInscricaoPartSubeveRequiredMessage_participantes}">
+                            <f:selectItems value="#{participantesController.itemsAvailableSelectOne}"
+                                           var="participantesItem"
+                                           itemValue="#{participantesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInscricaoPartSubeveLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{inscricaoPartSubeveController.selected.status}" required="true" requiredMessage="#{bundle.EditInscricaoPartSubeveRequiredMessage_status}">
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInscricaoPartSubeveLabel_subeventos}" for="subeventos" />
+                        <p:selectOneMenu id="subeventos" value="#{inscricaoPartSubeveController.selected.subeventos}" required="true" requiredMessage="#{bundle.EditInscricaoPartSubeveRequiredMessage_subeventos}">
+                            <f:selectItems value="#{subeventosController.itemsAvailableSelectOne}"
+                                           var="subeventosItem"
+                                           itemValue="#{subeventosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inscricaoPartSubeveController.create}" value="#{bundle.Save}" update="display,:InscricaoPartSubeveListForm:datalist,:growl" oncomplete="handleSubmit(args,'InscricaoPartSubeveCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InscricaoPartSubeveCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

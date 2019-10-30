@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalasCreateDlg" widgetVar="SalasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSalasTitle}">
+            <h:form id="SalasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSalasLabel_idsala}" for="idsala" />
+                        <p:inputText id="idsala" value="#{salasController.selected.idsala}" title="#{bundle.CreateSalasTitle_idsala}" required="true" requiredMessage="#{bundle.CreateSalasRequiredMessage_idsala}"/>
+                        <p:outputLabel value="#{bundle.CreateSalasLabel_descricao}" for="descricao" />
+                        <p:inputText id="descricao" value="#{salasController.selected.descricao}" title="#{bundle.CreateSalasTitle_descricao}" required="true" requiredMessage="#{bundle.CreateSalasRequiredMessage_descricao}"/>
+                        <p:outputLabel value="#{bundle.CreateSalasLabel_capacidadetotal}" for="capacidadetotal" />
+                        <p:inputText id="capacidadetotal" value="#{salasController.selected.capacidadetotal}" title="#{bundle.CreateSalasTitle_capacidadetotal}" required="true" requiredMessage="#{bundle.CreateSalasRequiredMessage_capacidadetotal}"/>
+                        <p:outputLabel value="#{bundle.CreateSalasLabel_capacidadeocupada}" for="capacidadeocupada" />
+                        <p:inputText id="capacidadeocupada" value="#{salasController.selected.capacidadeocupada}" title="#{bundle.CreateSalasTitle_capacidadeocupada}" required="true" requiredMessage="#{bundle.CreateSalasRequiredMessage_capacidadeocupada}"/>
+                        <p:outputLabel value="#{bundle.CreateSalasLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{salasController.selected.status}" required="true" requiredMessage="#{bundle.EditSalasRequiredMessage_status}">
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{salasController.create}" value="#{bundle.Save}" update="display,:SalasListForm:datalist,:growl" oncomplete="handleSubmit(args,'SalasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SalasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

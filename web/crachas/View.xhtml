@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CrachasViewDlg" widgetVar="CrachasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCrachasTitle}">
+            <h:form id="CrachasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{crachasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCrachasLabel_idcracha}"/>
+                        <h:outputText value="#{crachasController.selected.idcracha}" title="#{bundle.ViewCrachasTitle_idcracha}"/>
+                        <h:outputText value="#{bundle.ViewCrachasLabel_url}"/>
+                        <h:outputText value="#{crachasController.selected.url}" title="#{bundle.ViewCrachasTitle_url}"/>
+                        <h:outputText value="#{bundle.ViewCrachasLabel_eventos}"/>
+                        <h:outputText value="#{crachasController.selected.eventos}" title="#{bundle.ViewCrachasTitle_eventos}"/>
+                        <h:outputText value="#{bundle.ViewCrachasLabel_participantes}"/>
+                        <h:outputText value="#{crachasController.selected.participantes}" title="#{bundle.ViewCrachasTitle_participantes}"/>
+                        <h:outputText value="#{bundle.ViewCrachasLabel_status}"/>
+                        <h:outputText value="#{crachasController.selected.status}" title="#{bundle.ViewCrachasTitle_status}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CrachasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

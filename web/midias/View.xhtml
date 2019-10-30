@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MidiasViewDlg" widgetVar="MidiasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMidiasTitle}">
+            <h:form id="MidiasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{midiasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMidiasLabel_idmidia}"/>
+                        <h:outputText value="#{midiasController.selected.idmidia}" title="#{bundle.ViewMidiasTitle_idmidia}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_legenda}"/>
+                        <h:outputText value="#{midiasController.selected.legenda}" title="#{bundle.ViewMidiasTitle_legenda}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_pathmidia}"/>
+                        <h:outputText value="#{midiasController.selected.pathmidia}" title="#{bundle.ViewMidiasTitle_pathmidia}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_categoriamidia}"/>
+                        <h:outputText value="#{midiasController.selected.categoriamidia}" title="#{bundle.ViewMidiasTitle_categoriamidia}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_eventos}"/>
+                        <h:outputText value="#{midiasController.selected.eventos}" title="#{bundle.ViewMidiasTitle_eventos}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_status}"/>
+                        <h:outputText value="#{midiasController.selected.status}" title="#{bundle.ViewMidiasTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewMidiasLabel_subeventos}"/>
+                        <h:outputText value="#{midiasController.selected.subeventos}" title="#{bundle.ViewMidiasTitle_subeventos}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MidiasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

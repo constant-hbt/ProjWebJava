@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParticipantesCreateDlg" widgetVar="ParticipantesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateParticipantesTitle}">
+            <h:form id="ParticipantesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{participantesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateParticipantesLabel_idparticipante}" for="idparticipante" />
+                        <p:inputText id="idparticipante" value="#{participantesController.selected.idparticipante}" title="#{bundle.CreateParticipantesTitle_idparticipante}" required="true" requiredMessage="#{bundle.CreateParticipantesRequiredMessage_idparticipante}"/>
+                        <p:outputLabel value="#{bundle.CreateParticipantesLabel_eventos}" for="eventos" />
+                        <p:selectOneMenu id="eventos" value="#{participantesController.selected.eventos}" required="true" requiredMessage="#{bundle.EditParticipantesRequiredMessage_eventos}">
+                            <f:selectItems value="#{eventosController.itemsAvailableSelectOne}"
+                                           var="eventosItem"
+                                           itemValue="#{eventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateParticipantesLabel_usuarios}" for="usuarios" />
+                        <p:selectOneMenu id="usuarios" value="#{participantesController.selected.usuarios}" required="true" requiredMessage="#{bundle.EditParticipantesRequiredMessage_usuarios}">
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="usuariosItem"
+                                           itemValue="#{usuariosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{participantesController.create}" value="#{bundle.Save}" update="display,:ParticipantesListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipantesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApresentacaoCreateDlg" widgetVar="ApresentacaoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateApresentacaoTitle}">
+            <h:form id="ApresentacaoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apresentacaoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_idapresentacao}" for="idapresentacao" />
+                        <p:inputText id="idapresentacao" value="#{apresentacaoController.selected.idapresentacao}" title="#{bundle.CreateApresentacaoTitle_idapresentacao}" required="true" requiredMessage="#{bundle.CreateApresentacaoRequiredMessage_idapresentacao}"/>
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_descricaoapresentacao}" for="descricaoapresentacao" />
+                        <p:inputText id="descricaoapresentacao" value="#{apresentacaoController.selected.descricaoapresentacao}" title="#{bundle.CreateApresentacaoTitle_descricaoapresentacao}" required="true" requiredMessage="#{bundle.CreateApresentacaoRequiredMessage_descricaoapresentacao}"/>
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_priavaliador}" for="priavaliador" />
+                        <p:inputText id="priavaliador" value="#{apresentacaoController.selected.priavaliador}" title="#{bundle.CreateApresentacaoTitle_priavaliador}" />
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_segavaliador}" for="segavaliador" />
+                        <p:inputText id="segavaliador" value="#{apresentacaoController.selected.segavaliador}" title="#{bundle.CreateApresentacaoTitle_segavaliador}" />
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_subeventos}" for="subeventos" />
+                        <p:selectOneMenu id="subeventos" value="#{apresentacaoController.selected.subeventos}" required="true" requiredMessage="#{bundle.EditApresentacaoRequiredMessage_subeventos}">
+                            <f:selectItems value="#{subeventosController.itemsAvailableSelectOne}"
+                                           var="subeventosItem"
+                                           itemValue="#{subeventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateApresentacaoLabel_usuarios}" for="usuarios" />
+                        <p:selectOneMenu id="usuarios" value="#{apresentacaoController.selected.usuarios}" required="true" requiredMessage="#{bundle.EditApresentacaoRequiredMessage_usuarios}">
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="usuariosItem"
+                                           itemValue="#{usuariosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apresentacaoController.create}" value="#{bundle.Save}" update="display,:ApresentacaoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ApresentacaoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApresentacaoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

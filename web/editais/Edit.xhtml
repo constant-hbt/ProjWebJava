@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EditaisEditDlg" widgetVar="EditaisEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEditaisTitle}">
+            <h:form id="EditaisEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{editaisController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_idedital}" for="idedital" />
+                        <p:inputText id="idedital" value="#{editaisController.selected.idedital}" title="#{bundle.EditEditaisTitle_idedital}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_idedital}"/>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_descricao}" for="descricao" />
+                        <p:inputText id="descricao" value="#{editaisController.selected.descricao}" title="#{bundle.EditEditaisTitle_descricao}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_descricao}"/>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_dataabertura}" for="dataabertura" />
+                        <p:calendar id="dataabertura" pattern="MM/dd/yyyy" value="#{editaisController.selected.dataabertura}" title="#{bundle.EditEditaisTitle_dataabertura}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_dataabertura}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_dataencerramento}" for="dataencerramento" />
+                        <p:calendar id="dataencerramento" pattern="MM/dd/yyyy" value="#{editaisController.selected.dataencerramento}" title="#{bundle.EditEditaisTitle_dataencerramento}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_dataencerramento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_urlarquivo}" for="urlarquivo" />
+                        <p:inputText id="urlarquivo" value="#{editaisController.selected.urlarquivo}" title="#{bundle.EditEditaisTitle_urlarquivo}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_urlarquivo}"/>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_eventos}" for="eventos" />
+                        <p:selectOneMenu id="eventos" value="#{editaisController.selected.eventos}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_eventos}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{eventosController.itemsAvailableSelectOne}"
+                                           var="eventosItem"
+                                           itemValue="#{eventosItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{editaisController.selected.status}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_status}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEditaisLabel_usuarios}" for="usuarios" />
+                        <p:selectOneMenu id="usuarios" value="#{editaisController.selected.usuarios}" required="true" requiredMessage="#{bundle.EditEditaisRequiredMessage_usuarios}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="usuariosItem"
+                                           itemValue="#{usuariosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{editaisController.update}" value="#{bundle.Save}" update="display,:EditaisListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EditaisEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EditaisEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

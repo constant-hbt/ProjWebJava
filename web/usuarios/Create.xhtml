@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuariosTitle}">
+            <h:form id="UsuariosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_idusuario}" for="idusuario" />
+                        <p:inputText id="idusuario" value="#{usuariosController.selected.idusuario}" title="#{bundle.CreateUsuariosTitle_idusuario}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_idusuario}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{usuariosController.selected.nome}" title="#{bundle.CreateUsuariosTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_nome}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_rg}" for="rg" />
+                        <p:inputText id="rg" value="#{usuariosController.selected.rg}" title="#{bundle.CreateUsuariosTitle_rg}" />
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_cpf}" for="cpf" />
+                        <p:inputText id="cpf" value="#{usuariosController.selected.cpf}" title="#{bundle.CreateUsuariosTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_cpf}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{usuariosController.selected.email}" title="#{bundle.CreateUsuariosTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_senha}" for="senha" />
+                        <p:inputText id="senha" value="#{usuariosController.selected.senha}" title="#{bundle.CreateUsuariosTitle_senha}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_senha}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_telefone}" for="telefone" />
+                        <p:inputText id="telefone" value="#{usuariosController.selected.telefone}" title="#{bundle.CreateUsuariosTitle_telefone}" />
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_datanascimento}" for="datanascimento" />
+                        <p:calendar id="datanascimento" pattern="MM/dd/yyyy" value="#{usuariosController.selected.datanascimento}" title="#{bundle.EditUsuariosTitle_datanascimento}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_datanascimento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_endereco}" for="endereco" />
+                        <p:inputText id="endereco" value="#{usuariosController.selected.endereco}" title="#{bundle.CreateUsuariosTitle_endereco}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_endereco}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_status}" for="status" />
+                        <p:selectOneMenu id="status" value="#{usuariosController.selected.status}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_status}">
+                            <f:selectItems value="#{statusController.itemsAvailableSelectOne}"
+                                           var="statusItem"
+                                           itemValue="#{statusItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuariosController.create}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

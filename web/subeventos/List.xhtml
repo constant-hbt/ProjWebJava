@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSubeventosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="SubeventosListForm">
+                <p:panel header="#{bundle.ListSubeventosTitle}">
+                    <p:dataTable id="datalist" value="#{subeventosController.items}" var="item"
+                                 selectionMode="single" selection="#{subeventosController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idsubevento}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_idsubevento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idsubevento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_nome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_descricao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descricao}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_datainicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datainicio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_datafim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datafim}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_datafiminsc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datafiminsc}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_datainicioinsc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datainicioinsc}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_eventos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.eventos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_salas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.salas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSubeventosTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{subeventosController.prepareCreate}" update=":SubeventosCreateForm" oncomplete="PF('SubeventosCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SubeventosViewForm" oncomplete="PF('SubeventosViewDialog').show()" disabled="#{empty subeventosController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SubeventosEditForm" oncomplete="PF('SubeventosEditDialog').show()" disabled="#{empty subeventosController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{subeventosController.destroy}" update=":growl,datalist" disabled="#{empty subeventosController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
