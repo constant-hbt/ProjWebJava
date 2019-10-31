@@ -160,7 +160,9 @@ public class Equipes implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Equipes[ idequipe=" + idequipe + " ]";
+        return "Equipes{" + "idequipe=" + idequipe + ", nome=" + nome + ", descricao=" + descricao + ", idlider=" + idlider + ", inscricaoEquipeSubCollection=" + inscricaoEquipeSubCollection + ", presencasEquipeSubCollection=" + presencasEquipeSubCollection + ", participanteEquipeCollection=" + participanteEquipeCollection + ", status=" + status + '}';
     }
+
+    
     
 }

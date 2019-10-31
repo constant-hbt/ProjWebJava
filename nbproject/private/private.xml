@@ -5,6 +5,12 @@
         <group>
             <file>file:/home/henrique/NetBeansProjects/ProjWebH/web/index.xhtml</file>
             <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/model/Midias.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/EquipesController.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/exceptions/IllegalOrphanException.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/util/JsfUtil.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/EditaisJpaController.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/Conexao.java</file>
+            <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/controller/UsuariosController.java</file>
             <file>file:/home/henrique/NetBeansProjects/ProjWebH/src/java/hibernate.cfg.xml</file>
             <file>file:/home/henrique/NetBeansProjects/ProjWebH/web/welcomePrimefaces.xhtml</file>
         </group>
