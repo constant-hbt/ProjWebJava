@@ -72,6 +72,16 @@ public class Subeventos implements Serializable {
     @Column(name = "datainicioinsc")
     @Temporal(TemporalType.DATE)
     private Date datainicioinsc;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "qtdemin")
+    private int qtdemin;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "qtdemax")
+    private int qtdemax;
+    @Column(name = "qtdemaxequipes")
+    private Integer qtdemaxequipes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subeventos")
     private Collection<InscricaoEquipeSub> inscricaoEquipeSubCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subeventos")
@@ -103,7 +113,7 @@ public class Subeventos implements Serializable {
         this.idsubevento = idsubevento;
     }
 
-    public Subeventos(Integer idsubevento, String nome, String descricao, Date datainicio, Date datafim, Date datafiminsc, Date datainicioinsc) {
+    public Subeventos(Integer idsubevento, String nome, String descricao, Date datainicio, Date datafim, Date datafiminsc, Date datainicioinsc, int qtdemin, int qtdemax) {
         this.idsubevento = idsubevento;
         this.nome = nome;
         this.descricao = descricao;
@@ -111,6 +121,8 @@ public class Subeventos implements Serializable {
         this.datafim = datafim;
         this.datafiminsc = datafiminsc;
         this.datainicioinsc = datainicioinsc;
+        this.qtdemin = qtdemin;
+        this.qtdemax = qtdemax;
     }
 
     public Integer getIdsubevento() {
@@ -167,6 +179,30 @@ public class Subeventos implements Serializable {
 
     public void setDatainicioinsc(Date datainicioinsc) {
         this.datainicioinsc = datainicioinsc;
+    }
+
+    public int getQtdemin() {
+        return qtdemin;
+    }
+
+    public void setQtdemin(int qtdemin) {
+        this.qtdemin = qtdemin;
+    }
+
+    public int getQtdemax() {
+        return qtdemax;
+    }
+
+    public void setQtdemax(int qtdemax) {
+        this.qtdemax = qtdemax;
+    }
+
+    public Integer getQtdemaxequipes() {
+        return qtdemaxequipes;
+    }
+
+    public void setQtdemaxequipes(Integer qtdemaxequipes) {
+        this.qtdemaxequipes = qtdemaxequipes;
     }
 
     public Collection<InscricaoEquipeSub> getInscricaoEquipeSubCollection() {

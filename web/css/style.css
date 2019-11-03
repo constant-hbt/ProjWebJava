@@ -1,0 +1,40 @@
+html{
+    overflow-x: hidden;
+}
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    background: grey url(../img/fundo_verde.png) no-repeat center top fixed;
+    background-size: 100% 100%;
+}
+
+h1{
+    text-align: center;
+    font-size: 2em;
+}
+
+h2{
+    font-size: 1.1em;
+    color: grey;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+#cadastro{
+    /*background-color: rgba(145, 151, 151, 0.6);*/
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.formCadastro{
+    margin: 30px 10px 30px 10px;
+}
+
+.btn-submit{
+    text-align: center;
+    margin-left: 45%;
+}
+
+
+
+
