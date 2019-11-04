@@ -100,12 +100,14 @@ public class Usuarios implements Serializable {
         this.idusuario = idusuario;
     }
 
-    public Usuarios(Integer idusuario, String nome, String cpf, String email, String senha, Date datanascimento, String endereco) {
+    public Usuarios(Integer idusuario, String nome, String cpf, String rg, String email, String senha, String telefone, Date datanascimento, String endereco) {
         this.idusuario = idusuario;
         this.nome = nome;
         this.cpf = cpf;
+        this.rg = rg;
         this.email = email;
         this.senha = senha;
+        this.telefone = telefone;
         this.datanascimento = datanascimento;
         this.endereco = endereco;
     }

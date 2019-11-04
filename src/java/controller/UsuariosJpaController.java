@@ -18,8 +18,10 @@ import model.Organizadores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import model.Submissao;
 import model.Editais;
@@ -33,12 +35,17 @@ import model.Usuarios;
  */
 public class UsuariosJpaController implements Serializable {
 
-    public UsuariosJpaController(UserTransaction utx, EntityManagerFactory emf) {
-        this.utx = utx;
-        this.emf = emf;
-    }
+    
+    @Resource
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
+    
+    public UsuariosJpaController(EntityManagerFactory emf) {
+        this.emf= null;
+        this.utx = null;
+    }
+    
+    
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
