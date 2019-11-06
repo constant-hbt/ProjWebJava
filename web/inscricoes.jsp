@@ -23,7 +23,20 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+        
+        <script>
+            $('document').ready(function(){
+                $(".insc-evento").click(function() {
+                    var inscEvento = $(this).data("idevento");
+                    alert(inscEvento);
+                });
+                
+                $(".insc-sub").click(function() {
+                    var inscSubeve = $(this).data("idsubevento");
+                    alert(inscSubeve);
+                });
+            });
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -63,7 +76,7 @@
                             </div>
                             <p><span>Local: <%= evento.getLocal() %></span></p>
                             <div class="dropdown">
-                                <button id="botaoInscEvento<%= evento.getIdevento() %>" class="mx-auto btn btn-success">Inscrever-se</button>
+                                <button id="botaoInscEvento<%= evento.getIdevento() %>" data-idevento="<%= evento.getIdevento() %>" class="mx-auto btn btn-success insc-evento">Inscrever-se</button>
 
                                 <button id="botaoVerSubeve<%=evento.getIdevento() %>" class="btn btn-info" type="button" id="dropdownMenuButton" data-toggle="collapse" data-target="#subeventos<%= evento.getIdevento() %>">
                                     Ver sub-eventos
@@ -121,7 +134,7 @@
                                                                 <p class="card-text">Local: sala<%= subevento.getSalas().getIdsala()%>, descrição: <%= subevento.getSalas().getDescricao() %></p>
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <button class="btn btn-outline-primary" id="inscSub<%=subevento.getIdsubevento() %>" href="">Inscrever-se</button>
+                                                                <button class="btn btn-outline-primary insc-sub" id="inscSub<%=subevento.getIdsubevento() %>" data-idsubevento="<%=subevento.getIdsubevento() %>" href="">Inscrever-se</button>
                                                             </div>
                                                         </div>
                                                     </div>
