@@ -4,6 +4,10 @@
     Author     : henrique
 --%>
 
+<%@page import="model.Subeventos"%>
+<%@page import="model.Eventos"%>
+<%@page import="java.util.List"%>
+<%@page import="controller.Inscricoes"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -35,34 +39,104 @@
                             criar uma equipe, participando em grupos!
                         </p>
                     </div>
-
-                    <div class="jumbotron jumbotron-fluid mt-5">
-                        <div class="container">
-                            <h1 id="nomeEvento" class="display-4">Nome do evento</h1>
-                            <p id="descEvento" class="lead">Descrição do evento! Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam similique saepe, sint maxime, quibusdam fuga velit explicabo sed quos odit laudantium deserunt placeat tempore non exercitationem eaque deleniti. Magnam, consequatur?</p>
-                            <p id="dataEvento">Data:</p>
+                    <div class="container"> <!--Alteração no Jumbotran -->
+                        <% 
+                            try{
+                                Inscricoes DAO = new Inscricoes();
+                                List<Eventos> eventos = DAO.listarEventos();
+                                if(eventos.size() == 0){
+                                    out.println("<h2>Não existem eventos disponíveis!</h2>");
+                                }else{
+                                    for(Eventos evento: eventos){
+                        %>
+                        
+                        <div class="jumbotron jumbotron-fluid mt-5">
+                            <h1 id="nomeEvento" class="display-4"><%= evento.getNome() %></h1>
+                            <p>ID: <span id="idEvento<%= evento.getIdevento() %>"><%= evento.getIdevento() %></span></p>
+                            <p id="descEvento" class="lead"><%= evento.getDescricao() %></p>
+                            <p>
+                                <span class="mx-3">Começa em: <%= evento.getDatainicio() %></span>
+                                <span class="mx-3">Termina em: <%= evento.getDatafim() %></span>
+                                <span class="mx-3">Inscrições começam em: <%= evento.getDatainicioinsc() %></span>
+                                <span class="mx-3">Inscrições terminam em: <%= evento.getDatafiminsc() %></span>
+                            </p>
+                            <p><span>Local: <%= evento.getLocal() %></span></p>
                             <div class="dropdown">
-                                <button id="botaoInsc" class="mx-auto btn btn-success">Inscrever-se</button>
+                                <button id="botaoInscEvento<%= evento.getIdevento() %>" class="mx-auto btn btn-success">Inscrever-se</button>
 
-                                <button id="botaoSubev" class="btn btn-info" type="button" id="dropdownMenuButton" data-toggle="collapse" data-target="#subeventos">
+                                <button id="botaoVerSubeve<%=evento.getIdevento() %>" class="btn btn-info" type="button" id="dropdownMenuButton" data-toggle="collapse" data-target="#subeventos<%= evento.getIdevento() %>">
                                     Ver sub-eventos
                                 </button>
-                                <div class="collapse navbar-collapse" id="subeventos">
+                                <div class="collapse navbar-collapse" id="subeventos<%=evento.getIdevento()%>">
                                     <ul class="navbar-nav ml-auto">
-                                        <div class="container">
-                                            <div class="card my-4">
-                                                <div class="card-body">
-                                                    <h4 id="nomeSubeve" class="card-title">Título do cartão</h4>
-                                                    <p id="descSubeve" class="card-text">Descrição do subevento: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sapien dui, feugiat et lorem quis, fringilla maximus nisl. Vivamus sed est pulvinar, aliquet purus ut, dictum elit.</p>
-                                                    <p id="dataSubeve">Data: </p>
-                                                    <a class="btn btn-outline-primary" href="">Inscrever-se</a>
+                                        <div class="container"> <!--Mexeu no li -->
+                                            <% 
+                                                List<Subeventos> subeventos = DAO.listarSubeventos(evento.getIdevento());
+                                                if(subeventos.size() == 0){
+                                                    out.println("<p>Não existem sub-eventos disponíveis para este evento!</p>");
+                                                }else{
+                                                    out.println("<p>Tem subeventos</p>");
+                                                    for(Subeventos subevento: subeventos){
+                                            %>
+                                            <li>
+                                                <div class="card my-4">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title"> <%= subevento.getNome() %> </h4>
+                                                        <p>ID: <span id="idSubevento<%= subevento.getIdsubevento() %>"><%= subevento.getIdsubevento() %></span></p>
+                                                        <p class="card-text"><%= subevento.getDescricao()%></p>
+                                                        <p class="card-text">
+                                                            <span class="mx-3">Começa em: <%= subevento.getDatainicio() %> </span>
+                                                            <span class="mx-3">Termina em: <%= subevento.getDatafim() %></span>
+                                                            <span class="mx-3">Inscrições começam em: <%= subevento.getDatainicioinsc() %></span>
+                                                            <span class="mx-3">Inscrições terminam em: <%= subevento.getDatafiminsc() %></span>
+                                                        </p>
+                                                        <% 
+                                                            if((subevento.getQtdemin() == 1 && subevento.getQtdemax() == 1) || subevento.getQtdemaxequipes() == 0){
+                                                        %>
+                                                        <p class="card-text">Participação individual</p>
+                                                        <%
+                                                            }else if((subevento.getQtdemin() == 1 && subevento.getQtdemax() > 1) && subevento.getQtdemaxequipes() > 0){
+                                                        %>
+                                                        <p class="card-text">
+                                                            <span class="mx-3">Participação individual e em equipes</span>
+                                                            <span class="mx-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></span>
+                                                            <span class="mx-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></span>
+                                                            <span class="mx-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></span>
+                                                        </p>
+                                                        <%      
+                                                            }else{
+                                                        %>
+                                                        <p class="card-text">
+                                                            <span class="mx-3">Participação somente em equipes</span>
+                                                            <span class="mx-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></span>
+                                                            <span class="mx-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></span>
+                                                            <span class="mx-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></span>
+                                                        </p>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <p class="card-text">Local: sala<%= subevento.getSalas().getIdsala()%>, descrição: <%= subevento.getSalas().getDescricao() %></p>
+                                                        <a class="btn btn-outline-primary" href="">Inscrever-se</a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </li>
+                                            <%
+                                                    } 
+                                                }
+                                                out.println("Acabou o for de subeventos aqui");
+                                            %>
                                         </div>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <%          
+                                    }
+                                }
+                            }catch(Exception e){
+                                System.out.println("Erro: " + e.getMessage());
+                            }
+                        %>
                     </div>
                 </div>
             </div>
