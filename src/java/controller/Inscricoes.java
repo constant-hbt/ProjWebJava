@@ -106,7 +106,7 @@ public class Inscricoes extends Conexao{
     
     public boolean inscreverEvento(int idUsuario, int idEvento) throws Exception{
         getConexao().setAutoCommit(false);
-        String sql = "INSERT INTO PARTICIPANTES (IDUSUARIO, IDEVENTO) VALUES (1, 1)";
+        String sql = "INSERT INTO PARTICIPANTES (IDUSUARIO, IDEVENTO) VALUES (?, ?)";
         PreparedStatement ps = getConexao().prepareStatement(sql);
         ps.setInt(1, idUsuario);
         ps.setInt(2, idEvento);
@@ -131,4 +131,49 @@ public class Inscricoes extends Conexao{
         getConexao().setAutoCommit(true);
         return true;
     }
+    
+    public boolean atualizarInscEvento(int idPart, int idEvento) throws Exception{
+        getConexao().setAutoCommit(false);
+        String sql = "UPDATE INSCRICAO_PART_EVENTO SET idstatus = 2 WHERE idevento = ? AND idparticipante = ?";
+        PreparedStatement ps = getConexao().prepareStatement(sql);
+        ps.setInt(1, idEvento);
+        ps.setInt(2, idPart);
+        if(ps.executeUpdate() > 0){
+            String sqli = "INSERT INTO INSCRICAO_PART_EVENTO (datahora, idparticipante, idevento, idstatus) VALUES (CURRENT_TIMESTAMP, ?, ?, 1)";
+            PreparedStatement ps2 = getConexao().prepareStatement(sqli);
+            ps.setInt(1, idPart);
+            ps.setInt(2, idEvento);
+            if(ps.executeUpdate() > 0){
+                String sqlu = "UPDATE PARTICIPANTES SET idevento = ? WHERE idparticipante = ?";
+                PreparedStatement ps3 = getConexao().prepareStatement(sqlu);
+                ps.setInt(1, idEvento);
+                ps.setInt(2, idPart);
+                if(ps.executeUpdate() == 0){
+                    getConexao().rollback();
+                    return false;
+                }
+            }
+        }
+        getConexao().commit();
+        getConexao().setAutoCommit(true);
+        return true;
+    }
+    
+    public ArrayList<Integer> verificarInscEvento(int idUsuario) throws Exception{
+        String sql = "SELECT idparticipante, idevento FROM PARTICIPANTES WHERE idusuario = ?";
+        PreparedStatement ps = getConexao().prepareStatement(sql);
+        ps.setInt(1, idUsuario);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Integer> ids = new ArrayList<>();
+        if(rs.next()){
+            int idp = rs.getInt("idparticipante");
+            int ide = rs.getInt("idevento");
+            ids.add(idp);
+            ids.add(ide);
+            return ids;
+        }
+        ids.add(0);
+        ids.add(0);
+        return ids;
+    } 
 }
