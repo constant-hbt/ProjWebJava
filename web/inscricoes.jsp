@@ -4,6 +4,7 @@
     Author     : henrique
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Subeventos"%>
 <%@page import="model.Eventos"%>
 <%@page import="java.util.List"%>
@@ -39,7 +40,7 @@
                             criar uma equipe, participando em grupos!
                         </p>
                     </div>
-                    <div class="container"> <!--Alteração no Jumbotran -->
+                    <div class="container">
                         <% 
                             try{
                                 Inscricoes DAO = new Inscricoes();
@@ -49,17 +50,17 @@
                                 }else{
                                     for(Eventos evento: eventos){
                         %>
-                        
+
                         <div class="jumbotron jumbotron-fluid mt-5">
                             <h1 id="nomeEvento" class="display-4"><%= evento.getNome() %></h1>
                             <p>ID: <span id="idEvento<%= evento.getIdevento() %>"><%= evento.getIdevento() %></span></p>
                             <p id="descEvento" class="lead"><%= evento.getDescricao() %></p>
-                            <p>
-                                <span class="mx-3">Começa em: <%= evento.getDatainicio() %></span>
-                                <span class="mx-3">Termina em: <%= evento.getDatafim() %></span>
-                                <span class="mx-3">Inscrições começam em: <%= evento.getDatainicioinsc() %></span>
-                                <span class="mx-3">Inscrições terminam em: <%= evento.getDatafiminsc() %></span>
-                            </p>
+                            <div class="row">
+                                <div class="col-md-3">Começa em: <%= evento.getDatainicio() %></div>
+                                <div class="col-md-3">Termina em: <%= evento.getDatafim() %></div>
+                                <div class="col-md-3">Inscrições começam em: <%= evento.getDatainicioinsc() %></div>
+                                <div class="col-md-3">Inscrições terminam em: <%= evento.getDatafiminsc() %></div>
+                            </div>
                             <p><span>Local: <%= evento.getLocal() %></span></p>
                             <div class="dropdown">
                                 <button id="botaoInscEvento<%= evento.getIdevento() %>" class="mx-auto btn btn-success">Inscrever-se</button>
@@ -68,14 +69,13 @@
                                     Ver sub-eventos
                                 </button>
                                 <div class="collapse navbar-collapse" id="subeventos<%=evento.getIdevento()%>">
-                                    <ul class="navbar-nav ml-auto">
-                                        <div class="container"> <!--Mexeu no li -->
+                                    <div class="container">
+                                        <ul class="navbar-nav ml-auto">
                                             <% 
                                                 List<Subeventos> subeventos = DAO.listarSubeventos(evento.getIdevento());
                                                 if(subeventos.size() == 0){
                                                     out.println("<p>Não existem sub-eventos disponíveis para este evento!</p>");
                                                 }else{
-                                                    out.println("<p>Tem subeventos</p>");
                                                     for(Subeventos subevento: subeventos){
                                             %>
                                             <li>
@@ -84,12 +84,13 @@
                                                         <h4 class="card-title"> <%= subevento.getNome() %> </h4>
                                                         <p>ID: <span id="idSubevento<%= subevento.getIdsubevento() %>"><%= subevento.getIdsubevento() %></span></p>
                                                         <p class="card-text"><%= subevento.getDescricao()%></p>
-                                                        <p class="card-text">
-                                                            <span class="mx-3">Começa em: <%= subevento.getDatainicio() %> </span>
-                                                            <span class="mx-3">Termina em: <%= subevento.getDatafim() %></span>
-                                                            <span class="mx-3">Inscrições começam em: <%= subevento.getDatainicioinsc() %></span>
-                                                            <span class="mx-3">Inscrições terminam em: <%= subevento.getDatafiminsc() %></span>
-                                                        </p>
+                                                        <div class="card-text row">
+                                                            
+                                                            <div class="col-md-3">Começa em: <%= subevento.getDatainicio() %> </div>
+                                                            <div class="col-md-3">Termina em: <%= subevento.getDatafim() %></div>
+                                                            <div class="col-md-3">Inscrições começam em: <%= subevento.getDatainicioinsc() %></div>
+                                                            <div class="col-md-3">Inscrições terminam em: <%= subevento.getDatafiminsc() %></div>
+                                                        </div>
                                                         <% 
                                                             if((subevento.getQtdemin() == 1 && subevento.getQtdemax() == 1) || subevento.getQtdemaxequipes() == 0){
                                                         %>
@@ -97,36 +98,41 @@
                                                         <%
                                                             }else if((subevento.getQtdemin() == 1 && subevento.getQtdemax() > 1) && subevento.getQtdemaxequipes() > 0){
                                                         %>
-                                                        <p class="card-text">
-                                                            <span class="mx-3">Participação individual e em equipes</span>
-                                                            <span class="mx-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></span>
-                                                            <span class="mx-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></span>
-                                                            <span class="mx-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></span>
-                                                        </p>
+                                                        <div class="card-text row">
+                                                            <div class="col-md-3">Participação individual e em equipes</div>
+                                                            <div class="col-md-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></div>
+                                                            <div class="col-md-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></div>
+                                                            <div class="col-md-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></div>
+                                                        </div>
                                                         <%      
                                                             }else{
                                                         %>
-                                                        <p class="card-text">
-                                                            <span class="mx-3">Participação somente em equipes</span>
-                                                            <span class="mx-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></span>
-                                                            <span class="mx-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></span>
-                                                            <span class="mx-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></span>
+                                                        <div class="card-text row">
+                                                            <div class="col-md-3">Participação somente em equipes</div>
+                                                            <div class="col-md-3">Quantidade mínima de participantes em cada equipe: <%= subevento.getQtdemin() %></div>
+                                                            <div class="col-md-3">Quantidade máxima de participantes em cada equipe: <%= subevento.getQtdemax() %></div>
+                                                            <div class="col-md-3">Quantidade máxima de equipes: <%= subevento.getQtdemaxequipes() %></div>
                                                         </p>
                                                         <%
                                                             }
                                                         %>
-                                                        <p class="card-text">Local: sala<%= subevento.getSalas().getIdsala()%>, descrição: <%= subevento.getSalas().getDescricao() %></p>
-                                                        <a class="btn btn-outline-primary" href="">Inscrever-se</a>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="card-text">Local: sala<%= subevento.getSalas().getIdsala()%>, descrição: <%= subevento.getSalas().getDescricao() %></p>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button class="btn btn-outline-primary" id="inscSub<%=subevento.getIdsubevento() %>" href="">Inscrever-se</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </li>
                                             <%
                                                     } 
                                                 }
-                                                out.println("Acabou o for de subeventos aqui");
                                             %>
-                                        </div>
-                                    </ul>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +143,7 @@
                                 System.out.println("Erro: " + e.getMessage());
                             }
                         %>
-                    </div>
+                    </div><!--Fechamento do container-->
                 </div>
             </div>
         </div>

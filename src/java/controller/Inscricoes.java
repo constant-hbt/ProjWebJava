@@ -90,10 +90,9 @@ public class Inscricoes extends Conexao{
                 
                 Status statusSala = new Status();
                 statusSala.setIdstatus(rsSala.getInt("idStatus"));
-                String sqlStatusSala = "Select descricao FROM STATUS WHERE idstatus = ?";
-                PreparedStatement psSattusSala = getConexao().prepareStatement(sqlStatusSala);
-                psSattus.setInt(1, status.getIdstatus());
-                ResultSet rsStatusSala = psSattusSala.executeQuery();
+                String sqlStatusSala = "Select descricao FROM STATUS WHERE idstatus = 1";
+                PreparedStatement psStatusSala = getConexao().prepareStatement(sqlStatusSala);
+                ResultSet rsStatusSala = psStatusSala.executeQuery();
                 if(rsStatusSala.next()){
                     statusSala.setDescricao(rsStatus.getString("descricao"));
                 }
