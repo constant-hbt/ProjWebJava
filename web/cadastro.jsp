@@ -18,12 +18,12 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         <script src="js/verificacao.js"></script>
 
     </head>
 
-    <body onload="carregou()">
+    <body>
         <div class="row">
 
             <div class="col-md-3">
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                 <label for="cpf" class="control-label">CPF</label>
-                                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Ex: 123.456.789-10" required="required">
+                                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Ex: 123.456.789-10" data-mask="999.999.999-99" required="required">
                                 </div>
                             </div>
                             <div class="col-md-6">

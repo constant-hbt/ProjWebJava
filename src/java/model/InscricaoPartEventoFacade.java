@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class InscricaoPartEventoFacade extends AbstractFacade<InscricaoPartEvento> {
 
-    @PersistenceContext(unitName = "ProjWebHPU")
+    @PersistenceContext(unitName = "Excluir2PU")
     private EntityManager em;
 
     @Override

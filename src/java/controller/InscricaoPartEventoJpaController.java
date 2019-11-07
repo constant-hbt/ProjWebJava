@@ -19,6 +19,7 @@ import javax.transaction.UserTransaction;
 import model.Eventos;
 import model.InscricaoPartEvento;
 import model.Participantes;
+import model.Status;
 
 /**
  *
@@ -52,6 +53,11 @@ public class InscricaoPartEventoJpaController implements Serializable {
                 participantes = em.getReference(participantes.getClass(), participantes.getIdparticipante());
                 inscricaoPartEvento.setParticipantes(participantes);
             }
+            Status status = inscricaoPartEvento.getStatus();
+            if (status != null) {
+                status = em.getReference(status.getClass(), status.getIdstatus());
+                inscricaoPartEvento.setStatus(status);
+            }
             em.persist(inscricaoPartEvento);
             if (eventos != null) {
                 eventos.getInscricaoPartEventoCollection().add(inscricaoPartEvento);
@@ -60,6 +66,10 @@ public class InscricaoPartEventoJpaController implements Serializable {
             if (participantes != null) {
                 participantes.getInscricaoPartEventoCollection().add(inscricaoPartEvento);
                 participantes = em.merge(participantes);
+            }
+            if (status != null) {
+                status.getInscricaoPartEventoCollection().add(inscricaoPartEvento);
+                status = em.merge(status);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -86,6 +96,8 @@ public class InscricaoPartEventoJpaController implements Serializable {
             Eventos eventosNew = inscricaoPartEvento.getEventos();
             Participantes participantesOld = persistentInscricaoPartEvento.getParticipantes();
             Participantes participantesNew = inscricaoPartEvento.getParticipantes();
+            Status statusOld = persistentInscricaoPartEvento.getStatus();
+            Status statusNew = inscricaoPartEvento.getStatus();
             if (eventosNew != null) {
                 eventosNew = em.getReference(eventosNew.getClass(), eventosNew.getIdevento());
                 inscricaoPartEvento.setEventos(eventosNew);
@@ -93,6 +105,10 @@ public class InscricaoPartEventoJpaController implements Serializable {
             if (participantesNew != null) {
                 participantesNew = em.getReference(participantesNew.getClass(), participantesNew.getIdparticipante());
                 inscricaoPartEvento.setParticipantes(participantesNew);
+            }
+            if (statusNew != null) {
+                statusNew = em.getReference(statusNew.getClass(), statusNew.getIdstatus());
+                inscricaoPartEvento.setStatus(statusNew);
             }
             inscricaoPartEvento = em.merge(inscricaoPartEvento);
             if (eventosOld != null && !eventosOld.equals(eventosNew)) {
@@ -110,6 +126,14 @@ public class InscricaoPartEventoJpaController implements Serializable {
             if (participantesNew != null && !participantesNew.equals(participantesOld)) {
                 participantesNew.getInscricaoPartEventoCollection().add(inscricaoPartEvento);
                 participantesNew = em.merge(participantesNew);
+            }
+            if (statusOld != null && !statusOld.equals(statusNew)) {
+                statusOld.getInscricaoPartEventoCollection().remove(inscricaoPartEvento);
+                statusOld = em.merge(statusOld);
+            }
+            if (statusNew != null && !statusNew.equals(statusOld)) {
+                statusNew.getInscricaoPartEventoCollection().add(inscricaoPartEvento);
+                statusNew = em.merge(statusNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -154,6 +178,11 @@ public class InscricaoPartEventoJpaController implements Serializable {
             if (participantes != null) {
                 participantes.getInscricaoPartEventoCollection().remove(inscricaoPartEvento);
                 participantes = em.merge(participantes);
+            }
+            Status status = inscricaoPartEvento.getStatus();
+            if (status != null) {
+                status.getInscricaoPartEventoCollection().remove(inscricaoPartEvento);
+                status = em.merge(status);
             }
             em.remove(inscricaoPartEvento);
             utx.commit();

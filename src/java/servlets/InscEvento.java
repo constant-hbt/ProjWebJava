@@ -83,11 +83,12 @@ public class InscEvento extends HttpServlet {
             Inscricoes DAO = new Inscricoes();
             ArrayList<Integer> ids = DAO.verificarInscEvento(idUsuario);
             String msg = "";
+            
             if(ids.get(0) == 0){
                 if(DAO.inscreverEvento(idUsuario, idEvento)){
                     msg = "Inscrição realizada com sucesso!";
-                    response.setStatus(HttpServletResponse.SC_CREATED);
                     response.getWriter().write(msg);
+                    response.setStatus(HttpServletResponse.SC_CREATED);
                 }else{
                     msg = "Erro ao realizar a inscrição!";
                     response.getWriter().write(msg);

@@ -29,7 +29,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "inscricao_part_evento", catalog = "proj_web", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "InscricaoPartEvento.findAll", query = "SELECT i FROM InscricaoPartEvento i")})
+    @NamedQuery(name = "InscricaoPartEvento.findAll", query = "SELECT i FROM InscricaoPartEvento i")
+    , @NamedQuery(name = "InscricaoPartEvento.findByIdinscricao", query = "SELECT i FROM InscricaoPartEvento i WHERE i.idinscricao = :idinscricao")
+    , @NamedQuery(name = "InscricaoPartEvento.findByDatahora", query = "SELECT i FROM InscricaoPartEvento i WHERE i.datahora = :datahora")})
 public class InscricaoPartEvento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +51,9 @@ public class InscricaoPartEvento implements Serializable {
     @JoinColumn(name = "idparticipante", referencedColumnName = "idparticipante")
     @ManyToOne(optional = false)
     private Participantes participantes;
+    @JoinColumn(name = "idstatus", referencedColumnName = "idstatus")
+    @ManyToOne(optional = false)
+    private Status status;
 
     public InscricaoPartEvento() {
     }
@@ -92,6 +97,14 @@ public class InscricaoPartEvento implements Serializable {
 
     public void setParticipantes(Participantes participantes) {
         this.participantes = participantes;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

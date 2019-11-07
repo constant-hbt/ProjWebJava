@@ -57,8 +57,8 @@ public class Inscricoes extends Conexao{
             subevento.setIdsubevento(rs.getInt("idSubevento"));
             subevento.setNome(rs.getString("nome"));
             subevento.setDescricao(rs.getString("descricao"));
-            subevento.setDatainicio(rs.getDate("datainicio"));
-            subevento.setDatafim(rs.getDate("datafim"));
+            subevento.setDatahorainicio(rs.getString("datahorainicio"));
+            subevento.setDatahorafim(rs.getString("datahorafim"));
             subevento.setDatainicioinsc(rs.getDate("datainicioinsc"));
             subevento.setDatafiminsc(rs.getDate("datafiminsc"));
             subevento.setQtdemin(rs.getInt("qtdemin"));

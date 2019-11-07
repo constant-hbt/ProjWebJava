@@ -33,7 +33,17 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "subeventos", catalog = "proj_web", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Subeventos.findAll", query = "SELECT s FROM Subeventos s")})
+    @NamedQuery(name = "Subeventos.findAll", query = "SELECT s FROM Subeventos s")
+    , @NamedQuery(name = "Subeventos.findByIdsubevento", query = "SELECT s FROM Subeventos s WHERE s.idsubevento = :idsubevento")
+    , @NamedQuery(name = "Subeventos.findByNome", query = "SELECT s FROM Subeventos s WHERE s.nome = :nome")
+    , @NamedQuery(name = "Subeventos.findByDescricao", query = "SELECT s FROM Subeventos s WHERE s.descricao = :descricao")
+    , @NamedQuery(name = "Subeventos.findByDatahorainicio", query = "SELECT s FROM Subeventos s WHERE s.datahorainicio = :datahorainicio")
+    , @NamedQuery(name = "Subeventos.findByDatahorafim", query = "SELECT s FROM Subeventos s WHERE s.datahorafim = :datahorafim")
+    , @NamedQuery(name = "Subeventos.findByDatafiminsc", query = "SELECT s FROM Subeventos s WHERE s.datafiminsc = :datafiminsc")
+    , @NamedQuery(name = "Subeventos.findByDatainicioinsc", query = "SELECT s FROM Subeventos s WHERE s.datainicioinsc = :datainicioinsc")
+    , @NamedQuery(name = "Subeventos.findByQtdemin", query = "SELECT s FROM Subeventos s WHERE s.qtdemin = :qtdemin")
+    , @NamedQuery(name = "Subeventos.findByQtdemax", query = "SELECT s FROM Subeventos s WHERE s.qtdemax = :qtdemax")
+    , @NamedQuery(name = "Subeventos.findByQtdemaxequipes", query = "SELECT s FROM Subeventos s WHERE s.qtdemaxequipes = :qtdemaxequipes")})
 public class Subeventos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,14 +64,14 @@ public class Subeventos implements Serializable {
     private String descricao;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "datainicio")
-    @Temporal(TemporalType.DATE)
-    private Date datainicio;
+    @Size(min = 1, max = 16)
+    @Column(name = "datahorainicio")
+    private String datahorainicio;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "datafim")
-    @Temporal(TemporalType.DATE)
-    private Date datafim;
+    @Size(min = 1, max = 16)
+    @Column(name = "datahorafim")
+    private String datahorafim;
     @Basic(optional = false)
     @NotNull
     @Column(name = "datafiminsc")
@@ -113,12 +123,12 @@ public class Subeventos implements Serializable {
         this.idsubevento = idsubevento;
     }
 
-    public Subeventos(Integer idsubevento, String nome, String descricao, Date datainicio, Date datafim, Date datafiminsc, Date datainicioinsc, int qtdemin, int qtdemax) {
+    public Subeventos(Integer idsubevento, String nome, String descricao, String datahorainicio, String datahorafim, Date datafiminsc, Date datainicioinsc, int qtdemin, int qtdemax) {
         this.idsubevento = idsubevento;
         this.nome = nome;
         this.descricao = descricao;
-        this.datainicio = datainicio;
-        this.datafim = datafim;
+        this.datahorainicio = datahorainicio;
+        this.datahorafim = datahorafim;
         this.datafiminsc = datafiminsc;
         this.datainicioinsc = datainicioinsc;
         this.qtdemin = qtdemin;
@@ -149,20 +159,20 @@ public class Subeventos implements Serializable {
         this.descricao = descricao;
     }
 
-    public Date getDatainicio() {
-        return datainicio;
+    public String getDatahorainicio() {
+        return datahorainicio;
     }
 
-    public void setDatainicio(Date datainicio) {
-        this.datainicio = datainicio;
+    public void setDatahorainicio(String datahorainicio) {
+        this.datahorainicio = datahorainicio;
     }
 
-    public Date getDatafim() {
-        return datafim;
+    public String getDatahorafim() {
+        return datahorafim;
     }
 
-    public void setDatafim(Date datafim) {
-        this.datafim = datafim;
+    public void setDatahorafim(String datahorafim) {
+        this.datahorafim = datahorafim;
     }
 
     public Date getDatafiminsc() {

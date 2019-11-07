@@ -28,7 +28,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "status", catalog = "proj_web", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")})
+    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")
+    , @NamedQuery(name = "Status.findByIdstatus", query = "SELECT s FROM Status s WHERE s.idstatus = :idstatus")
+    , @NamedQuery(name = "Status.findByDescricao", query = "SELECT s FROM Status s WHERE s.descricao = :descricao")})
 public class Status implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +50,8 @@ public class Status implements Serializable {
     private Collection<InscricaoPartSubeve> inscricaoPartSubeveCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
     private Collection<Midias> midiasCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
+    private Collection<InscricaoPartEvento> inscricaoPartEventoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
     private Collection<Certificados> certificadosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
@@ -121,6 +125,14 @@ public class Status implements Serializable {
 
     public void setMidiasCollection(Collection<Midias> midiasCollection) {
         this.midiasCollection = midiasCollection;
+    }
+
+    public Collection<InscricaoPartEvento> getInscricaoPartEventoCollection() {
+        return inscricaoPartEventoCollection;
+    }
+
+    public void setInscricaoPartEventoCollection(Collection<InscricaoPartEvento> inscricaoPartEventoCollection) {
+        this.inscricaoPartEventoCollection = inscricaoPartEventoCollection;
     }
 
     public Collection<Certificados> getCertificadosCollection() {
